@@ -99,3 +99,8 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+.idea/
+
+/mobile_connector-1.0-SNAPSHOT.jar
+/application.properties

@@ -1,0 +1,22 @@
+---
+  - name: Copy mobile_connector and application.properties
+    become: yes
+    become_user: root
+    copy:
+      src: "{{ item }}"
+      dest: "/root/{{ item }}"
+      mode: 0644
+      owner: root
+      group: root
+    with_items:
+      - application.properties
+      - mobile_connector-1.0-SNAPSHOT.jar
+    tags: mobcon
+
+  - name: Start mobile_connector-1.0-SNAPSHOT.jar
+    become: yes
+    become_user: root
+    shell: java -jar mobile_connector-1.0-SNAPSHOT.jar
+    args:
+      chdir: /root/
+    tags: mobcon1

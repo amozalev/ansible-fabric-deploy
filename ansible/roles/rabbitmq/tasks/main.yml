@@ -1,0 +1,71 @@
+---
+  - name: Add rabbitmq to APT repository
+    apt_repository: repo='deb http://www.rabbitmq.com/debian/ testing main' state=present
+    tags: rabbitmq
+
+  - name: Add RabbitMQ GPG key
+    apt_key: url=https://www.rabbitmq.com/rabbitmq-release-signing-key.asc state=present
+    tags: rabbitmq
+
+  - name: 'Install rabbitmq-server'
+    apt: pkg=rabbitmq-server update_cache=yes state=installed force=yes
+    tags: rabbitmq
+
+  - name: Enable rabbitmq_management plugin
+    rabbitmq_plugin:
+      names: rabbitmq_management
+      state: enabled
+    tags: rabbitmq
+
+  - name: Add rabbitmq user
+    rabbitmq_user:
+      user: mobile_scanner
+      password: 0000
+      #permissions:
+      #- vhost: /
+      configure_priv: .*
+      read_priv: .*
+      write_priv: .*
+      state: present
+      force: yes
+    tags: rabbitmq
+
+  - name: Add rabbitmq user 2
+    rabbitmq_user:
+      user: process_scanner
+      password: 0000
+      configure_priv: .*
+      read_priv: .*
+      write_priv: .*
+      state: present
+      force: yes
+    tags: rabbitmq
+
+#  - name: Copy rabbitmqadmin from ansible_host to ansible_guest
+#    copy:
+#      src: /vagrant/ansible/rabbitmqadmin
+#      dest: /usr/local/bin/rabbitmqadmin
+#    tags: rabbitmq
+
+  - name: Create queues
+    rabbitmq_queue:
+      name: "{{ item }}"
+    with_items:
+      -  "GPS_TRACK_QUEUE"
+      -  "scanner_result_queue"
+    ignore_errors: true
+    tags: rabbitmq
+
+  - name: Add Exchanges
+    rabbitmq_exchange:
+      name: "{{ item }}"
+      type: "fanout"
+    with_items:
+      - "PROCESS_EXCHANGE"
+    ignore_errors: true
+    tags: rabbitmq
+
+  - name: Restart rabbitmq-server
+    service: name=rabbitmq-server state=restarted enabled=yes
+    tags: rabbitmq
+

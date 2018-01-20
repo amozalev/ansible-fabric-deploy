@@ -1,0 +1,26 @@
+---
+  - name: Install vsftpd
+    apt: pkg=vsftpd update_cache=yes state=latest
+    tags: vsftpd
+
+  - name: Install configuration file
+    template:
+      src:   vsftpd.conf
+      dest: /etc/vsftpd.conf
+      owner: root
+      group: root
+      mode: '0600'
+    tags: vsftpd
+
+  - name: Create psp_sync directory
+    file:
+      path: /srv/ftp/psp_sync
+      state: directory
+    tags: vsftpd
+
+  - name: Restart vsftpd
+    service:
+      name: vsftpd
+      state: restarted
+      enabled: true
+    tags: vsftpd

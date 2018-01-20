@@ -1,0 +1,53 @@
+---
+  - name: 'Add tomcat group'
+    group:
+      name: tomcat
+    tags: tomcat
+
+  - name: 'Add tomcat user'
+    user:
+      name: tomcat
+      group: tomcat
+      home: /opt/tomcat
+      createhome: no
+    tags: tomcat
+
+  - name: Download Tomcat
+    get_url:
+      url: http://archive.apache.org/dist/tomcat/tomcat-8/v8.5.14/bin/apache-tomcat-8.5.14.tar.gz
+      dest: /opt/apache-tomcat-8.5.14.tar.gz 
+    tags: tomcat
+
+  - name: Extract archive
+    command: chdir=/opt /bin/tar xvf /opt/apache-tomcat-8.5.14.tar.gz -C /opt/ creates=/opt/apache-tomcat-8.5.14
+    tags: tomcat
+
+  - name: Symlink install directory
+    file: src=/opt/apache-tomcat-8.5.14 path=/opt/tomcat state=link
+    tags: tomcat
+
+  - name: Change ownership of Tomcat installation
+    file: path=/opt/tomcat/ owner=tomcat group=tomcat state=directory recurse=yes
+    tags: tomcat
+
+  - name: Configure Tomcat users
+    template: src=tomcat-users.xml dest=/opt/tomcat/conf/
+    notify: restart tomcat
+    tags: tomcat
+
+  - name: Change chmod for /opt/tomcat/conf/ directory
+    file: path=/opt/tomcat/conf state=directory mode=g+r recurse=yes
+    tags: tomcat
+
+  - name: Change chmod for /opt/tomcat/conf
+    file: path=/opt/tomcat/conf state=directory mode=g+x
+    tags: tomcat
+
+  - name: startup tomcat
+    sudo_user: tomcat
+    shell: nohup /opt/tomcat/bin/catalina.sh start
+    args:
+      chdir: /opt/tomcat/bin
+      executable: /bin/bash
+    tags: tomcat
+

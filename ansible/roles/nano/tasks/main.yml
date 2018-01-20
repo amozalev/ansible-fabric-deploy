@@ -1,0 +1,9 @@
+---
+  - name: Update packages
+    apt: >
+      update_cache=yes
+    tags: nano
+
+  - name: Add nano
+    apt: name=nano update_cache=yes
+    tags: nano
