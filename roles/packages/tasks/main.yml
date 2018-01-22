@@ -1,7 +1,7 @@
 ---
-  - name: Install python
-    raw: apt-get -y install python
-
+#  - name: Install python
+#    raw: apt-get -y install python
+#
   - name: Install essential packages
     apt: name={{ item }} update_cache=yes state=latest
     with_items:

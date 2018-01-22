@@ -11,9 +11,9 @@
   - name: Create odg_assist database
     sudo_user: postgres
     postgresql_db:
-      name: {{postgresql_db}}
-      login_user: {{postgresql_db_user}}
-      login_password: {{postgresql_db_pass}}
+      name: "{{postgresql_db}}"
+      login_user: "{{postgresql_db_user}}"
+      login_password: "{{postgresql_db_pass}}"
       encoding: UTF-8
       template: template0
     tags: postgresql

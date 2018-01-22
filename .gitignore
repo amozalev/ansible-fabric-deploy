@@ -104,3 +104,5 @@ ENV/
 
 /mobile_connector-1.0-SNAPSHOT.jar
 /application.properties
+/ansible/odgassist.retry
+/odgassist.retry
