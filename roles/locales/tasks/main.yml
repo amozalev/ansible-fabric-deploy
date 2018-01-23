@@ -1,7 +1,7 @@
 ---
 - name: 'Install locales'
   tags: 'locales'
-  sudo: 'yes'
+  become: 'yes'
   apt: >
     pkg=locales
     state=latest
@@ -9,7 +9,7 @@
 
 - name: 'Install language packs'
   tags: 'locales'
-  sudo: 'yes'
+  become: 'yes'
   apt: >
     pkg={{ item }}
     state=latest
@@ -21,7 +21,7 @@
 
 #- name: 'Reconfigure dpkg'
 #  tags: 'locales'
-#  sudo: 'yes'
+#  become: 'yes'
 #  command: 'dpkg-reconfigure locales'
 #  when: 'locale_languages.changed'
 
@@ -32,7 +32,7 @@
 
 #- name: 'Create locale configuration file'
 #  tags: 'locales'
-#  sudo: 'yes'
+#  become: 'yes'
 #  file: >
 #    path=/var/lib/locales/supported.d/local
  #   state=touch
@@ -40,7 +40,7 @@
 
 #- name: 'Configure system locale'
 #  tags: 'locales'
-#  sudo: 'yes'
+#  become: 'yes'
 #  locale_gen: >
  #   name=ru_RU.utf8
 #    state=present

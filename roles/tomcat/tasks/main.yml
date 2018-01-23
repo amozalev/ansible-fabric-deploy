@@ -44,7 +44,8 @@
     tags: tomcat
 
   - name: startup tomcat
-    sudo_user: tomcat
+    become: yes
+    become_user: tomcat
     shell: nohup /opt/tomcat/bin/catalina.sh start
     args:
       chdir: /opt/tomcat/bin

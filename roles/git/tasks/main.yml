@@ -1,4 +1,4 @@
 ---
   - name: 'Install git'
-    tags: git
     apt: pkg=git update_cache=yes state=latest
+    tags: git

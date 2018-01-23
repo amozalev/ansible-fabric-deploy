@@ -8,9 +8,12 @@
       - python-software-properties
       - software-properties-common
       - python-pip
+      - fail2ban
     tags: packages
 
-  - name: Install python-requests package
-    pip:
-      name: requests
+  - name: Install python-requests packages
+    pip: name={{ item }}
+    with_items:
+      - requests
+      - psycopg2
     tags: packages

@@ -1,4 +1,0 @@
-#ansible_python_interpreter = /usr/bin/python
-postgresql_db_name = odgassist
-postgresql_db_user = postgres
-postgresql_db_pass = 0000

@@ -19,8 +19,8 @@
 
   - name: Add rabbitmq user
     rabbitmq_user:
-      user: mobile_scanner
-      password: 0000
+      user: "{{ rabbitmq_user }}"
+      password: "{{ rabbitmq_user_password }}"
       #permissions:
       #- vhost: /
       configure_priv: .*
@@ -32,8 +32,8 @@
 
   - name: Add rabbitmq user 2
     rabbitmq_user:
-      user: process_scanner
-      password: 0000
+      user: "{{ rabbitmq_user2 }}"
+      password: "{{ rabbitmq_user2_password }}"
       configure_priv: .*
       read_priv: .*
       write_priv: .*

@@ -1,7 +1,9 @@
 ---
 - name: apply common configuration to all nodes
   hosts: all
-  sudo: yes
+  become: yes
+  become_user: root
+  become_method: sudo
   gather_facts: no
   pre_tasks:
     - name: 'Install python2'
@@ -12,7 +14,6 @@
     - git
     - java
     - postgresql
-    - rabbitmq
     - tomcat
     - vsftpd
     - locales
@@ -21,7 +22,9 @@
 #      apt: update_cache=yes cache_valid_time=300
 
 - hosts: with_rabbitmq
-  sudo: yes
+  become: yes
+  become_user: root
+  become_method: sudo
   roles:
     - rabbitmq
     - mobile_connector

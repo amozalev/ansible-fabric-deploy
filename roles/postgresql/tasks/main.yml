@@ -8,23 +8,27 @@
       - python-psycopg2
     tags: postgresql
 
-  - name: Create odg_assist database
-    sudo_user: postgres
+  - name: Change ubuntu postgres password
+    user:
+      name: postgres
+      password: "{{postgresql_pass}}"
+    tags: postgresql
+
+  - name: Create database
+    become_user: postgres
     postgresql_db:
-      name: "{{postgresql_db}}"
-      login_user: "{{postgresql_db_user}}"
-      login_password: "{{postgresql_db_pass}}"
+      name: "{{postgresql_db_name}}"
+      login_user: "{{postgresql_user}}"
+      login_password: "{{postgresql_pass}}"
       encoding: UTF-8
       template: template0
     tags: postgresql
 
-# Не работает блеать!
-  - name: Change postgres user password
-    sudo: yes
-    sudo_user: postgres
+  - name: Change db user password
+    become: yes
+    become_user: postgres
     postgresql_user:
-      db: odg_assist
-      user: postgres
-      password: 0000
-      force: yes
+      db: "{{postgresql_db_name}}"
+      user: "{{postgresql_user}}"
+      password: "{{postgresql_pass}}"
     tags: postgresql
