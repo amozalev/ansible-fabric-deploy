@@ -10,11 +10,11 @@
     with_items:
       - application.properties
       - mobile_connector-1.0-SNAPSHOT.jar
-    tags: mobcon
+    tags: mobile_connector
 
   - name: Start mobile_connector-1.0-SNAPSHOT.jar
     become: yes
     shell: java -jar mobile_connector-1.0-SNAPSHOT.jar
     args:
       chdir: /root/
-    tags: mobcon1
+    tags: mobile_connector
