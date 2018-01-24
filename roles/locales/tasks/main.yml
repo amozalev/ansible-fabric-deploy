@@ -19,29 +19,35 @@
   - 'language-pack-ru-base'
   register: 'locale_languages'
 
-#- name: 'Reconfigure dpkg'
-#  tags: 'locales'
-#  become: 'yes'
-#  command: 'dpkg-reconfigure locales'
-#  when: 'locale_languages.changed'
+- name: 'Reconfigure dpkg'
+  tags: 'locales'
+  become: 'yes'
+  command: 'dpkg-reconfigure locales -f noninteractive'
+  when: 'locale_languages.changed'
 
-#- name: 'Detect locale configuration file'
-#  tags: 'locales'
-#  stat: 'path=/var/lib/locales/supported.d/local'
-#  register: 'locale_configuration'
+- name: 'Detect locale configuration file'
+  tags: 'locales'
+  stat: 'path=/var/lib/locales/supported.d/local'
+  register: 'locale_configuration'
 
-#- name: 'Create locale configuration file'
-#  tags: 'locales'
-#  become: 'yes'
-#  file: >
-#    path=/var/lib/locales/supported.d/local
- #   state=touch
-#  when: 'not locale_configuration.stat.exists'
+- name: 'Create locale configuration file'
+  tags: 'locales'
+  become: 'yes'
+  file: >
+    path=/var/lib/locales/supported.d/local
+    state=touch
+  when: 'not locale_configuration.stat.exists'
 
-#- name: 'Configure system locale'
-#  tags: 'locales'
-#  become: 'yes'
-#  locale_gen: >
- #   name=ru_RU.utf8
-#    state=present
- # tags: 'locales'
+- name: 'Configure system locale'
+  tags: 'locales'
+  become: 'yes'
+  locale_gen: name={{ item }} state=present
+  with_items:
+    - ru_RU.UTF-8
+    - ru_RU.CP1251
+    - ru_RU
+    - ru_RU.KOI8-R
+
+- name: 'Set locale'
+  tags: 'locales'
+  command: '/usr/sbin/update-locale LANG="{{ ru_locale }}" LC_ALL="{{ ru_locale }}"'

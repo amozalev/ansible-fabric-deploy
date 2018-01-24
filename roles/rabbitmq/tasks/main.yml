@@ -48,6 +48,17 @@
 #    tags: rabbitmq
 
   - name: Create queues
+    become: yes
+    rabbitmq_queue:
+      name: "{{ item }}"
+    with_items:
+      -  "GPS_TRACK_QUEUE"
+      -  "scanner_result_queue"
+    ignore_errors: true
+    tags: rabbitmq
+
+  - name: Create queues after error
+    become: yes
     rabbitmq_queue:
       name: "{{ item }}"
     with_items:
@@ -57,6 +68,17 @@
     tags: rabbitmq
 
   - name: Add Exchanges
+    become: yes
+    rabbitmq_exchange:
+      name: "{{ item }}"
+      type: "fanout"
+    with_items:
+      - "PROCESS_EXCHANGE"
+    ignore_errors: true
+    tags: rabbitmq
+
+  - name: Add Exchanges after error
+    become: yes
     rabbitmq_exchange:
       name: "{{ item }}"
       type: "fanout"

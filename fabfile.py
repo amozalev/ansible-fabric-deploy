@@ -4,6 +4,7 @@ from fabric.api import *
 env.guest_user = 'ubuntu'
 env.hosts = '192.168.50.11'
 env.ssh_key_dir = '~/.ssh'
+env.password = 'ubuntu'
 
 
 def bootstrap():
