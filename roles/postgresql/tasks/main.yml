@@ -9,6 +9,7 @@
     tags: postgresql
 
   - name: Change ubuntu postgres password
+    become: yes
     user:
       name: postgres
       password: "{{postgresql_pass}}"

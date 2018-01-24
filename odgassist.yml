@@ -1,11 +1,13 @@
 ---
-- name: apply common configuration to all nodes
+- name: Apply common configuration to all hosts
   hosts: all
   become: yes
   become_user: root
   become_method: sudo
   gather_facts: no
   pre_tasks:
+    - name: 'Update packages'
+      apt: update_cache=yes
     - name: 'Install python2'
       raw: sudo apt-get -y install python
       tags:
@@ -23,7 +25,8 @@
 #    - name: update packages
 #      apt: update_cache=yes cache_valid_time=300
 
-- hosts: with_rabbitmq
+- name: Apply configuration to hosts with RabbitMQ
+  hosts: with_rabbitmq
   become: yes
   become_user: root
   become_method: sudo

@@ -50,4 +50,4 @@
 
 - name: 'Set locale'
   tags: 'locales'
-  command: '/usr/sbin/update-locale LANG="{{ ru_locale }}" LC_ALL="{{ ru_locale }}"'
+  command: '/usr/sbin/update-locale LANG=ru_RU.UTF-8 LC_ALL=ru_RU.UTF-8'

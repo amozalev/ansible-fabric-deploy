@@ -30,7 +30,7 @@
       force: yes
     tags: rabbitmq
 
-  - name: Add rabbitmq user 2
+  - name: Add rabbitmq user2
     rabbitmq_user:
       user: "{{ rabbitmq_user2 }}"
       password: "{{ rabbitmq_user2_password }}"
@@ -47,7 +47,7 @@
 #      dest: /usr/local/bin/rabbitmqadmin
 #    tags: rabbitmq
 
-  - name: Create queues
+  - name: Create queues (here may be RabbitMQ bug with error 201)
     become: yes
     rabbitmq_queue:
       name: "{{ item }}"
@@ -57,7 +57,7 @@
     ignore_errors: true
     tags: rabbitmq
 
-  - name: Create queues after error
+  - name: Create queues after error 201
     become: yes
     rabbitmq_queue:
       name: "{{ item }}"
@@ -67,7 +67,7 @@
     ignore_errors: true
     tags: rabbitmq
 
-  - name: Add Exchanges
+  - name: Add Exchanges (here may be RabbitMQ bug with error 201)
     become: yes
     rabbitmq_exchange:
       name: "{{ item }}"
@@ -77,7 +77,7 @@
     ignore_errors: true
     tags: rabbitmq
 
-  - name: Add Exchanges after error
+  - name: Add Exchanges after error 201
     become: yes
     rabbitmq_exchange:
       name: "{{ item }}"
