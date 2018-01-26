@@ -1,10 +1,10 @@
 import os
 from fabric.api import *
 
-env.guest_user = 'ubuntu'
-env.hosts = '192.168.50.11'
-env.ssh_key_dir = '~/.ssh'
-env.password = 'ubuntu'
+env.guest_user = 'ubuntu'  # Remote user
+env.hosts = '192.168.50.11'  # Remote host or hosts
+env.ssh_key_dir = '~/.ssh'  # Ssh keys directory on local and remote hosts
+env.password = 'ubuntu'  # User password
 
 
 def bootstrap():
