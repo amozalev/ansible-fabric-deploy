@@ -1,16 +1,24 @@
 ---
-  - name: Copy mobile_connector and application.properties
+  - name: Copy mobile_connector
     become: yes
     copy:
       src: "{{ local_jenkins_output_folder }}/{{ item }}"
       dest: "{{ remote_project_folder }}/{{ item }}"
       mode: 0644
       owner: "{{ remote_user }}"
-#      group: root
     with_items:
-      - application.properties
       - mobile_connector-1.0-SNAPSHOT.jar
     tags: mobile_connector
+
+  - name: Copy application.properties
+    become: yes
+    template:
+      src: application.properties.j2
+      dest: "{{ remote_project_folder }}/application.properties"
+      mode: 0644
+      owner: "{{ remote_user }}"
+    tags: mobile_connector
+
 
   - name: Start mobile_connector-1.0-SNAPSHOT.jar
     become: yes

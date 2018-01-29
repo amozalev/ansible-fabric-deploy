@@ -1,0 +1,14 @@
+server.port={{ mobile_connector_port }}
+spring.jpa.database=POSTGRESQL
+spring.datasource.platform=postgres
+spring.jpa.show-sql=true
+spring.jpa.hibernate.ddl-auto=update
+spring.database.driverClassName=org.postgresql.Driver
+spring.jpa.hibernate.naming.physical-strategy=ru.od.assist.v4.mobile_connector.NamingStrategy
+spring.jpa.hibernate.naming.implicit-strategy=ru.od.assist.v4.mobile_connector.MyImplicitNamingStrategy
+spring.jpa.hibernate.dialect=org.hibernate.dialect.PostgreSQL93Dialect
+spring.datasource.url=jdbc:postgresql://localhost:{{ postgresql_db_port }}/{{ postgresql_db_name }}
+spring.datasource.username={{ postgresql_user }}
+spring.datasource.password={{ postgresql_pass }}
+spring.mvc.view.prefix=/WEB-INF/jsp/
+spring.mvc.view.suffix=.jsp

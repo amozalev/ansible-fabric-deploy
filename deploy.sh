@@ -1,2 +1,2 @@
 #!/bin/bash
-ansible-playbook ./odgassist.yml -t "mobile_connector" -vvvv
+ansible-playbook ./odgassist.yml -t "mobile_connector"
