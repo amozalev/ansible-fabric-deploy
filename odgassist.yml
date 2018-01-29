@@ -1,11 +1,13 @@
 ---
-- name: Apply common configuration to all hosts
+- name: "--------------- Apply common configuration to all hosts ---------------"
   hosts: all
   become: yes
   become_user: root
   become_method: sudo
   gather_facts: no
   pre_tasks:
+    - name: 'Install python2'
+      raw: sudo apt-get -y install python
     - name: 'Update packages'
       apt: update_cache=yes
     - name: Create project folder
@@ -14,8 +16,6 @@
         mode: 0755
         owner: "{{ remote_user }}"
         state: directory
-    - name: 'Install python2'
-      raw: sudo apt-get -y install python
       tags:
         - always
   roles:
@@ -30,7 +30,7 @@
     - odgassist
     - supervisor
 
-- name: Apply configuration to hosts with RabbitMQ
+- name: "--------------- Apply configuration to hosts with RabbitMQ ---------------"
   hosts: with_rabbitmq
   become: yes
   become_user: root

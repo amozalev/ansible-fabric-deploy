@@ -33,3 +33,7 @@
       user: "{{postgresql_user}}"
       password: "{{postgresql_pass}}"
     tags: postgresql
+
+  - name: Reload PostgreSQL
+    service: name=postgresql state=reloaded
+    tags: postgresql

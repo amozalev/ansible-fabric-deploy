@@ -16,5 +16,5 @@
     become: yes
     shell: java -jar mobile_connector-1.0-SNAPSHOT.jar
     args:
-      chdir: "{{ remote_mobile_connector_folder}}"
+      chdir: "{{ remote_project_folder}}"
     tags: mobile_connector

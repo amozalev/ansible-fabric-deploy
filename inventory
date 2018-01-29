@@ -7,12 +7,13 @@
 [all:vars]
 ansible_user=ubuntu
 ansible_ssh_private_key_file='~/.ssh/192.168.50.11_key'
+log_path=/var/log/ansible/ansible.log
 remote_user=ubuntu
 
 local_jenkins_output_folder='.'
 remote_project_folder = '/home/{{ remote_user }}/odgassist'
 
-odgassist_jar_file='test_odgassist_file'
+odgassist_jar_file='lesha-1.0-SNAPSHOT-jar-with-dependencies.jar'
 
 postgresql_db_name='odgassist'
 postgresql_user='postgres'

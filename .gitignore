@@ -109,3 +109,4 @@ ENV/
 /roles/mobile_connector/files/application.properties
 /roles/mobile_connector/files/mobile_connector-1.0-SNAPSHOT.jar
 /test_odgassist_file
+/lesha-1.0-SNAPSHOT-jar-with-dependencies.jar
