@@ -1,0 +1,36 @@
+---
+  - name: Install supervisor
+    become: yes
+    apt: name=supervisor
+    tags: supervisor
+
+  - name: Copy supervisor config file
+    template:
+      src: odgassist.conf
+      dest: /etc/supervisor/conf.d
+      mode: 0644
+    tags: supervisor
+
+#  - name: Ensure Supervisor is started (if configured).
+#    become: yes
+#    service:
+#      name: supervisord
+#      state: started
+#      enabled: yes
+##    when: supervisor_started
+#    tags: supervisor
+
+  - name: Start odgassist with supervisor
+    supervisorctl:
+      name: odgassist
+      state: restarted
+      config: /etc/supervisor/supervisord.conf
+    tags: supervisor
+
+#  - name: Ensure Supervisor is enabled at boot (if configured).
+#    service:
+#      name: supervisord
+#      enabled: yes
+#    when: supervisor_enabled
+#    tags: supervisor
+

@@ -2,7 +2,7 @@
 Generates ssh keys for remote host and installs a set of packages (git, java, Russian locale, nano, postgresql, 
 tomcat, vsftpd, list of essential packages, rabbitmq and mobile_connector for the odgassist software).
 ## Usage
-0. Download.
+1. Download.
 0. Navigate into the ansible-java-deploy directory.
 0. Fill variables in fabric.py like on example:
     ```

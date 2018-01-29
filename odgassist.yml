@@ -8,6 +8,12 @@
   pre_tasks:
     - name: 'Update packages'
       apt: update_cache=yes
+    - name: Create project folder
+      file:
+        path: "{{ remote_project_folder }}"
+        mode: 0755
+        owner: "{{ remote_user }}"
+        state: directory
     - name: 'Install python2'
       raw: sudo apt-get -y install python
       tags:
@@ -21,9 +27,8 @@
     - tomcat
     - vsftpd
     - locales
-#  pre_tasks:
-#    - name: update packages
-#      apt: update_cache=yes cache_valid_time=300
+    - odgassist
+    - supervisor
 
 - name: Apply configuration to hosts with RabbitMQ
   hosts: with_rabbitmq

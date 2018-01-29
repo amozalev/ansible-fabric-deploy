@@ -1,0 +1,9 @@
+  - name: Copy odgassist jar file
+    become: yes
+    copy:
+      src: "{{ local_jenkins_output_folder }}/{{ odgassist_jar_file }}"
+      dest: "{{ remote_project_folder }}/{{ odgassist_jar_file }}"
+      mode: 0644
+      owner: "{{ remote_user }}"
+#      group: root
+    tags: odgassist
