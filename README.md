@@ -15,35 +15,38 @@ tomcat, vsftpd, list of essential packages, rabbitmq and mobile_connector for th
 0. Initially  "odgassist.yml" playbook is able to implement two snenarios: installs all packages or installs packages without rabbitmq with mobile_connector packages.
   Fill variables in inventory file like on the example:
     ```
-    [without_rabbitmq]
     192.168.50.11
-     
-    [with_rabbitmq]
-    192.168.50.11
-     
+ 
     [all:vars]
     ansible_user=ubuntu
     ansible_ssh_private_key_file='~/.ssh/192.168.50.11_key'
+    remote_user=ubuntu
      
-    jenkins_output_folder='.'
-    remote_mobile_connector_folder = '~/'
+    local_jenkins_output_folder='.'
+    remote_project_folder = '/home/{{ remote_user }}/odgassist'
+     
+    odgassist_jar_file='lesha-1.0-SNAPSHOT-jar-with-dependencies.jar'
+    mobile_connector_jar_file = 'mobile_connector-1.0-SNAPSHOT.jar'
      
     postgresql_db_name='odgassist'
+    postgresql_db_port=5432
     postgresql_user='postgres'
     postgresql_pass='0000'
      
-    [with_rabbitmq:vars]
-    rabbitmq_user='mobile_scanner'
+    allocated_memory = '-Xmx1G'
+     
+    mobile_connector_port=1234
+    rabbitmq_user='user1'
     rabbitmq_user_password='0000'
-    rabbitmq_user2='process_scanner'
+    rabbitmq_user2='user2'
     rabbitmq_user2_password='0000'
     ```
-0. Make necessary changes in deploy.sh for proper adjustment of "odgassist.yml" ansible playbook:
-paste `--limit without_rabbitmq` to choose installation of all packages with rabbitmq + mobile_connector or 
-paste `--limit with_rabbitmq` to install all. Example:
+0. In general case deploy.sh is intended to implement all tasks. Make necessary changes in deploy.sh in order to install certain packages:
+paste `--skip-tags "rabbitmq,mobile_connector"` to implement installation of packages without rabbitmq and mobile_connector for instance:
+    
     ```
-    ansible-playbook ./odgassist.yml --limit without_rabbitmq
+    ansible-playbook ./odgassist.yml --skip-tags "rabbitmq,mobile_connector"
     ```
-    In order to install some particular packages use --skip-tags or --tags options. Detailed description is presented in the official documentation: 
+    Thus use --skip-tags or --tags (equal to -t) options to vary executed tasks. Detailed description is presented in the official documentation: 
     <http://docs.ansible.com/ansible/latest/playbooks_tags.html">
 0. Execute `sh deploy.sh`.
