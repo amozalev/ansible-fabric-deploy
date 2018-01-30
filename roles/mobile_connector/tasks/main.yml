@@ -2,12 +2,10 @@
   - name: Copy mobile_connector
     become: yes
     copy:
-      src: "{{ local_jenkins_output_folder }}/{{ item }}"
-      dest: "{{ remote_project_folder }}/{{ item }}"
+      src: "{{ local_jenkins_output_folder }}/{{ mobile_connector_jar_file }}"
+      dest: "{{ remote_project_folder }}/{{ mobile_connector_jar_file }}"
       mode: 0644
       owner: "{{ remote_user }}"
-    with_items:
-      - mobile_connector-1.0-SNAPSHOT.jar
     tags: mobile_connector
 
   - name: Copy application.properties
@@ -19,10 +17,24 @@
       owner: "{{ remote_user }}"
     tags: mobile_connector
 
-
-  - name: Start mobile_connector-1.0-SNAPSHOT.jar
-    become: yes
-    shell: java -jar mobile_connector-1.0-SNAPSHOT.jar
-    args:
-      chdir: "{{ remote_project_folder}}"
+  - name: Copy mobile_connector config to supervisor config folder
+    template:
+      src: mobile_connector.j2
+      dest: /etc/supervisor/conf.d/mobile_connector.conf
+      mode: 0644
     tags: mobile_connector
+
+  - name: Start mobile_connector with supervisor
+    supervisorctl:
+      name: mobile_connector
+      state: restarted
+      config: /etc/supervisor/supervisord.conf
+    tags: mobile_connector
+
+
+#  - name: Start mobile_connector-1.0-SNAPSHOT.jar
+#    become: yes
+#    shell: java -jar mobile_connector-1.0-SNAPSHOT.jar
+#    args:
+#      chdir: "{{ remote_project_folder}}"
+#    tags: mobile_connector

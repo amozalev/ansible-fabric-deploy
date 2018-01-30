@@ -29,13 +29,6 @@
     - locales
     - odgassist
     - supervisor
-
-- name: "--------------- Apply configuration to hosts with RabbitMQ ---------------"
-  hosts: with_rabbitmq
-  become: yes
-  become_user: root
-  become_method: sudo
-  roles:
     - rabbitmq
     - mobile_connector
 ...

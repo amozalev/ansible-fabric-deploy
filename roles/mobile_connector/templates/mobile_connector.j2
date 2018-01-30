@@ -1,0 +1,7 @@
+[program:mobile_connector]
+command=java {{ allocated_memory }} -jar {{mobile_connector_jar_file}}
+directory={{remote_project_folder}}
+stdout_logfile=/var/log/supervisor/mobile_connector.log
+stderr_logfile=/var/log/supervisor/mobile_connector.log
+autostart=true
+autorestart=true

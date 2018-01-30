@@ -4,10 +4,10 @@
     apt: name=supervisor
     tags: supervisor
 
-  - name: Copy supervisor config file
+  - name: Copy odgassist config to supervisor config folder
     template:
-      src: odgassist.conf
-      dest: /etc/supervisor/conf.d
+      src: odgassist.j2
+      dest: /etc/supervisor/conf.d/odgassist.conf
       mode: 0644
     tags: supervisor
 

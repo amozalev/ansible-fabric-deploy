@@ -1,5 +1,5 @@
 [program:odgassist]
-command=java -jar {{odgassist_jar_file}}
+command=java {{ allocated_memory }} -jar {{odgassist_jar_file}}
 directory={{remote_project_folder}}
 stdout_logfile=/var/log/supervisor/odgassist.log
 stderr_logfile=/var/log/supervisor/odgassist.log
