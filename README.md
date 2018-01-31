@@ -4,8 +4,8 @@ tomcat, vsftpd, list of essential packages, rabbitmq and mobile_connector for th
 ## Requirements
 Check that fabric and ansible are installed on your local machine.
 ## Usage
-0. Download ansible-fabric-deploy.
-0. Navigate into the "ansible-fabric-deploy" directory.
+1. Clone or download.
+0. Navigate into the directory.
 0. Fill variables in fabric.py like on example:
     ```
     env.guest_user = 'ubuntu'     # Remote user
@@ -13,9 +13,7 @@ Check that fabric and ansible are installed on your local machine.
     env.ssh_key_dir = '~/.ssh'    # Ssh keys directory on local and remote hosts
     env.password = 'ubuntu'       # User password
     ```
-0. Execute `fab bootstrap` and input user password if necessary.
-0. Initially  "odgassist.yml" playbook is able to implement two snenarios: installs all packages or installs packages without rabbitmq with mobile_connector packages.
-  Fill variables in inventory file like on the example:
+0. Fill variables in inventory file like on the example:
     ```
     192.168.50.11
  
@@ -59,4 +57,5 @@ Check that fabric and ansible are installed on your local machine.
     ```
     Detailed description is presented in the official documentation: 
     <http://docs.ansible.com/ansible/latest/playbooks_tags.html">
+0. Execute `fab bootstrap` and input user password while needed. SSH keys are generated and installed on host machine.
 0. Execute `sh deploy.sh`.
