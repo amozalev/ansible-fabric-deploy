@@ -57,6 +57,6 @@ Check that fabric and ansible are installed on your local machine.
     ```
     ansible-playbook ./odgassist.yml -t "java,tomcat"
     ```
-    Thus use --skip-tags or --tags (equal to -t) options to vary executed tasks. Detailed description is presented in the official documentation: 
+    Detailed description is presented in the official documentation: 
     <http://docs.ansible.com/ansible/latest/playbooks_tags.html">
 0. Execute `sh deploy.sh`.
