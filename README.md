@@ -1,9 +1,11 @@
-# ansible-java-deploy
+# ansible-fabric-deploy
 Generates ssh keys for remote host and installs a set of packages (git, java, Russian locale, nano, postgresql, 
 tomcat, vsftpd, list of essential packages, rabbitmq and mobile_connector for the odgassist software).
+## Requirements
+Check that fabric and ansible are installed on your local machine.
 ## Usage
-1. Download.
-0. Navigate into the ansible-java-deploy directory.
+0. Download ansible-fabric-deploy.
+0. Navigate into the "ansible-fabric-deploy" directory.
 0. Fill variables in fabric.py like on example:
     ```
     env.guest_user = 'ubuntu'     # Remote user
@@ -41,11 +43,19 @@ tomcat, vsftpd, list of essential packages, rabbitmq and mobile_connector for th
     rabbitmq_user2='user2'
     rabbitmq_user2_password='0000'
     ```
-0. In general case deploy.sh is intended to implement all tasks. Make necessary changes in deploy.sh in order to install certain packages:
-paste `--skip-tags "rabbitmq,mobile_connector"` to implement installation of packages without rabbitmq and mobile_connector for instance:
+0. Initial deploy.sh is intended to implement all tasks. Make necessary changes in deploy.sh in order to vary installation:
+    use --skip-tags or --tags (equal to -t) options to remove or add packages to an installation.
+    
+    Example of installation of all packages without rabbitmq and mobile_connector:
     
     ```
     ansible-playbook ./odgassist.yml --skip-tags "rabbitmq,mobile_connector"
+    ```
+    
+    Example of installation of java and tomcat:
+    
+    ```
+    ansible-playbook ./odgassist.yml -t "java,tomcat"
     ```
     Thus use --skip-tags or --tags (equal to -t) options to vary executed tasks. Detailed description is presented in the official documentation: 
     <http://docs.ansible.com/ansible/latest/playbooks_tags.html">

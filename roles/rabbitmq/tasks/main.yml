@@ -21,8 +21,6 @@
     rabbitmq_user:
       user: "{{ rabbitmq_user }}"
       password: "{{ rabbitmq_user_password }}"
-      #permissions:
-      #- vhost: /
       configure_priv: .*
       read_priv: .*
       write_priv: .*
@@ -40,12 +38,6 @@
       state: present
       force: yes
     tags: rabbitmq
-
-#  - name: Copy rabbitmqadmin from ansible_host to ansible_guest
-#    copy:
-#      src: /vagrant/ansible/rabbitmqadmin
-#      dest: /usr/local/bin/rabbitmqadmin
-#    tags: rabbitmq
 
   - name: Create queues (here may be RabbitMQ bug with error 201)
     become: yes
