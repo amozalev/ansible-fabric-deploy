@@ -9,7 +9,7 @@ env.ssh_key_dir = '~/.ssh'  # Ssh keys directory on local and remote hosts
 
 
 def bootstrap():
-    env.ssh_key_filepath = os.path.join(env.ssh_key_dir, env.host_string + "_key")
+    env.ssh_key_filepath = os.path.join(env.ssh_key_dir, + "ssh_key")
     local('ssh-keygen -t rsa -b 2048 -f {}'.format(env.ssh_key_filepath))
     upload_keys(env.user)
     run('service ssh reload')
