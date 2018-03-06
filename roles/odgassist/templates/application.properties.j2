@@ -1,0 +1,52 @@
+server.port = {{ odgassist_port }}
+server.address = {{ odgassist_server }}
+printcontrolAddress = {{ odgassist_printcontrolAddress }}
+email.name= {{ odgassist_email_name }}
+email.pass= {{ odgassist_email_pass }}
+server.port.id= {{ odgassist_server }}:{{ odgassist_port }}
+path.ftp = {{ odgassist_ftp_path }}
+spring.jpa.properties.hibernate.cache.use_second_level_cache=false
+#\u0434\u043B\u044F LazyLoad
+spring.jpa.properties.hibernate.enable_lazy_load_no_trans=true
+spring.datasource.platform= {{ odgassist_spring_datasource_platform }}
+
+spring.jpa.hibernate.ddl-auto= {{ odgassist_spring_jpa_hibernate_ddl_auto }}
+spring.database.driverClassName= {{ odgassist_spring_database_driverClassName }}
+
+spring.datasource.url= {{ odgassist_spring_datasource_url }}
+
+spring.datasource.username= {{ odgassist_spring_datasource_username }}
+spring.datasource.password= {{ odgassist_spring_datasource_password }}
+ru.optimal_drive.odgassist.simpleLoginView.buttonToEnterInDev= {{ odgassist_buttonToEnterInDev }}
+spring.jpa.hibernate.naming.physical-strategy= {{ odgassist_spring_physical_strategy }}
+spring.jpa.hibernate.naming.implicit-strategy= {{ odgassist_spring_implicit_strategy }}
+
+ru.optimal_drive.odgassist.v3.start_bpmn= {{ odgassist_start_bpmn }}
+ru.optimal_drive.odgassist.v3.persist_bpmn= {{ odgassist_persist_bpmn }}
+ru.optimal_drive.odgassist.v3.show_dashboard= {{ odgassist_show_dashboard }}
+ru.optimal_drive.odgassist.v3.dev_trace= {{ odgassist_dev_trace }}
+ru.optimal_drive.odgassist.deviation.processTemplatejlh2678 = ''
+ru.optimal_drive.odgassist.deviation.capa_end_processTemplate_id= {{ odgassist_deviation_capa_end_processTemplate_id }}
+ru.optimal_drive.odgassist.deviation.capa_change_date_processTemplate_id= {{ odgassist_deviation_capa_change_date_processTemplate_id }}
+ru.optimal_drive.odgassist.deviation.capa_plan_end_processTemplate_id= {{ odgassist_deviation_capa_plan_end_processTemplate_id }}
+
+#hibernate.dialect=
+spring.jpa.properties.hibernate.dialect= {{ odgassist_spring_hibernate_dialect }}
+spring.data.jpa.repositories.enabled= {{ odgassist_spring_repositories_enabled }}
+# Enable JPA repositories.
+spring.jpa.database= {{ odgassist_spring_jpa_database }}
+# Target database to operate on, auto-detected by default. Can be alternatively set using the "databasePlatform" property.
+#spring.jpa.database-platform=org.hibernate.spatial.dialect.postgis.PostgisDialect
+# Name of the target database to operate on, auto-detected by default. Can be alternatively set using the "Database" enum.
+spring.jpa.generate-ddl=false
+# Initialize the schema on startup.
+# DDL mode. This is actually a shortcut for the "hibernate.hbm2ddl.auto" property. Default to "create-drop" when using an embedded database, "none" otherwise.
+#spring.jpa.hibernate.naming-strategy=org.hibernate.cfg.EJB3NamingStrategy
+# Naming strategy fully qualified name.
+spring.jpa.open-in-view=true
+# Register OpenEntityManagerInViewInterceptor. Binds a JPA EntityManager to the thread for the entire processing of the request.
+#spring.jpa.properties.*= # Additional native properties to set on the JPA provider.
+spring.jpa.show-sql=false
+# Enable logging of SQL statements.
+
+

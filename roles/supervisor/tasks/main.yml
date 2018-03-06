@@ -4,16 +4,22 @@
     apt: name=supervisor
     tags: supervisor
 
-  - name: Copy odgassist config to supervisor config folder
+  - name: Copy odgassist and superlance configs to supervisor config folder
     template:
-      src: odgassist.j2
-      dest: /etc/supervisor/conf.d/odgassist.conf
+      src: "{{ item }}"
+      dest: /etc/supervisor/conf.d/
       mode: 0644
+    with_items:
+      - odgassist.conf
+      - fatalmailbatch.conf
     tags: supervisor
 
-  - name: Start odgassist with supervisor
+  - name: Start odgassist, fatalmailbatch with supervisor
     supervisorctl:
-      name: odgassist
+      name: "{{ item }}"
       state: restarted
       config: /etc/supervisor/supervisord.conf
+    with_items:
+      - odgassist
+      - fatalmailbatch
     tags: supervisor

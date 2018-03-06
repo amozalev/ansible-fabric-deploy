@@ -1,3 +1,4 @@
+---
   - name: Copy odgassist jar file
     become: yes
     copy:
@@ -6,4 +7,13 @@
       mode: 0644
       owner: "{{ remote_user }}"
 #      group: root
+    tags: odgassist
+
+  - name: Copy odgassist application.properties
+    become: yes
+    template:
+      src: application.properties.j2
+      dest: "{{ remote_project_folder }}/application.properties"
+      mode: 0644
+      owner: "{{ remote_user }}"
     tags: odgassist

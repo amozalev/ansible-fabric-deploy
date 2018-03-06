@@ -1,24 +1,59 @@
 192.168.50.11
 
 [all:vars]
-ansible_user=ubuntu
-ansible_ssh_private_key_file='~/.ssh/ssh_key'
-remote_user=ubuntu
+ansible_host={{ lookup('env','ANSIBLE_HOST') }}
+ansible_user={{ lookup('env','ANSIBLE_USER') }}
+remote_user={{ lookup('env','ANSIBLE_REMOTE_USER') }}
+ansible_ssh_private_key_file='~/.ssh/{{ ansible_host }}_ssh_key'
 
 local_jenkins_output_folder='.'
 remote_project_folder = '/home/{{ remote_user }}/odgassist'
 
 odgassist_jar_file='lesha-1.0-SNAPSHOT-jar-with-dependencies.jar'
-mobile_connector_jar_file = 'mobile_connector-1.0-SNAPSHOT.jar'
+mobile_connector_jar_file = ''
 
 postgresql_db_name='odgassist'
 postgresql_db_port=5432
 postgresql_user='postgres'
 postgresql_pass='0000'
 
-allocated_memory = '-Xmx1G'
+superlance_toEmail = {{ lookup('env', 'SUPERLANCE_TOEMAIL') }}
+superlance_fromEmail = {{ lookup('env', 'SUPERLANCE_FROMEMAIL') }}
+superlance_smtpHost = {{ lookup('env', 'SUPERLANCE_SMTPHOST') }}
+superlance_userName = {{ lookup('env', 'SUPERLANCE_USERNAME') }}
+superlance_password = {{ lookup('env', 'SUPERLANCE_PASSWORD') }}
 
-mobile_connector_port=3265
+
+allocated_memory = ''
+
+odgassist_port = 1111
+odgassist_server = 'localhost'
+odgassist_printcontrolAddress = ''
+odgassist_email_name = ''
+odgassist_email_pass = ''
+odgassist_ftp_path = ''
+odgassist_spring_datasource_platform = ''
+odgassist_spring_jpa_hibernate_ddl_auto = ''
+odgassist_spring_database_driverClassName = ''
+odgassist_spring_datasource_url = ''
+odgassist_spring_datasource_username = ''
+odgassist_spring_datasource_password = ''
+odgassist_buttonToEnterInDev = ''
+odgassist_spring_physical_strategy = ''
+odgassist_spring_implicit_strategy = ''
+odgassist_start_bpmn = ''
+odgassist_persist_bpmn = ''
+odgassist_show_dashboard = ''
+odgassist_dev_trace = ''
+odgassist_deviation_processTemplatejlh2678 = ''
+odgassist_deviation_capa_end_processTemplate_id = ''
+odgassist_deviation_capa_change_date_processTemplate_id = ''
+odgassist_deviation_capa_plan_end_processTemplate_id = ''
+odgassist_spring_hibernate_dialect = ''
+odgassist_spring_repositories_enabled = ''
+odgassist_spring_jpa_database = ''
+
+mobile_connector_port=
 rabbitmq_user='mobile_scanner'
 rabbitmq_user_password='0000'
 rabbitmq_user2='process_scanner'

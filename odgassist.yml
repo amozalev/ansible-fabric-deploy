@@ -1,34 +1,39 @@
 ---
-- name: "--------------- Apply common configuration to all hosts ---------------"
-  hosts: all
-  become: yes
-  become_user: root
-  become_method: sudo
-  gather_facts: no
-  pre_tasks:
-    - name: 'Install python2'
-      raw: sudo apt-get -y install python
-    - name: 'Update packages'
-      apt: update_cache=yes
-    - name: Create project folder
-      file:
-        path: "{{ remote_project_folder }}"
-        mode: 0755
-        owner: "{{ remote_user }}"
-        state: directory
-      tags:
-        - always
-  roles:
-    - packages
-    - nano
-    - git
-    - java
-    - postgresql
-    - tomcat
-    - vsftpd
-    - locales
-    - odgassist
-    - supervisor
-    - rabbitmq
-    - mobile_connector
+  - name: "--------------- Apply common configuration to all hosts ---------------"
+    hosts: all
+    become: yes
+    become_user: root
+    become_method: sudo
+    gather_facts: no
+    pre_tasks:
+      - name: Install python2
+        raw: sudo apt-get -y install python
+        tags:
+          - always
+      - name: Update packages
+        apt: update_cache=yes
+        tags:
+          - always
+      - name: Create project folder
+        file:
+          path: "{{ remote_project_folder }}"
+          mode: 0755
+          owner: "{{ remote_user }}"
+          state: directory
+        tags:
+          - always
+    roles:
+      - packages
+      - nano
+      - git
+      - locales
+      - java
+      - nginx
+      - postgresql
+      - tomcat
+      - vsftpd
+      - odgassist
+      - supervisor
+      - rabbitmq
+      - mobile_connector
 ...
